@@ -7,7 +7,7 @@ public class SwiftCouchbaseLitePlugin: NSObject, FlutterPlugin, CBManagerDelegat
     let mDatabaseEventListener = DatabaseEventListener()
     let mQueryEventListener = QueryEventListener();
     let mReplicatorEventListener = ReplicatorEventListener();
-    let databaseDispatchQueue = DispatchQueue(label: "DatabaseDispatchQueue", qos: .background)
+    let databaseDispatchQueue = DispatchQueue(label: "DatabaseDispatchQueue", qos: .background, attributes: .concurrent)
     
     #if DEBUG
     lazy var mCBManager = CBManager(delegate: self, logLevel: .debug)
