@@ -8,9 +8,9 @@ class Document {
   }
 
   Map<dynamic, dynamic> _data;
-  String _dbname;
-  String _id;
-  int _sequence;
+  final String _dbname;
+  final String _id;
+  final int _sequence;
 
   String get id => _id;
   int get sequence => _sequence;
