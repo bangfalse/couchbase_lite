@@ -8,9 +8,12 @@ class Document {
   }
 
   Map<dynamic, dynamic> _data;
-  final String _dbname;
-  final String _id;
-  final int _sequence;
+  // ignore: prefer_final_fields
+  String _dbname;
+  // ignore: prefer_final_fields
+  String _id;
+  // ignore: prefer_final_fields
+  int _sequence;
 
   String get id => _id;
   int get sequence => _sequence;
