@@ -1,5 +1,7 @@
 part of couchbase_lite;
 
+// ignore_for_file: deprecated_member_use_from_same_package
+
 enum ReplicatorType { pushAndPull, push, pull }
 
 class ReplicatorConfiguration {
@@ -12,6 +14,7 @@ class ReplicatorConfiguration {
   String pinnedServerCertificate;
   Authenticator authenticator;
   List<String> channels;
+
   /// Filters which documents should be replicated. Keys are attribute names,
   /// and values are a list of allowed values for that attribute. A document
   /// will only be pushed if it matches all of the filters in this map.
@@ -20,6 +23,12 @@ class ReplicatorConfiguration {
   List<dynamic> pushAttributeValuesFilter;
   @Deprecated('use pushAttributeFilters instead for multiple filter support')
   String pushAttributeKeyFilter;
+
+  /// Allows deletes, even if [pushAttributeFilters] is set. Attributes will not
+  /// be considered when processing deletes (because they are no longer
+  /// available).
+  bool pushAttributeFilterAllowDeletes;
+
   /// Filters which documents should be replicated. Keys are attribute names,
   /// and values are a list of allowed values for that attribute. A document
   /// will only be pulled if it matches all of the filters in this map.
@@ -28,6 +37,12 @@ class ReplicatorConfiguration {
   List<dynamic> pullAttributeValuesFilter;
   @Deprecated('use pullAttributeFilters instead for multiple filter support')
   String pullAttributeKeyFilter;
+
+  /// Allows deletes, even if [pullAttributeFilters] is set. Attributes will not
+  /// be considered when processing deletes (because they are no longer
+  /// available).
+  bool pullAttributeFilterAllowDeletes;
+
   Map headers;
 
   Map<String, dynamic> toJson() {
@@ -68,6 +83,8 @@ class ReplicatorConfiguration {
 
     if (pushAttributeFilters != null) {
       map['pushAttributeFilters'] = pushAttributeFilters;
+      map['pushAttributeFilterAllowDeletes'] =
+          pushAttributeFilterAllowDeletes ?? false;
     }
 
     if (pullAttributeKeyFilter != null && pullAttributeValuesFilter != null) {
@@ -77,6 +94,8 @@ class ReplicatorConfiguration {
 
     if (pullAttributeFilters != null) {
       map['pullAttributeFilters'] = pullAttributeFilters;
+      map['pullAttributeFilterAllowDeletes'] =
+          pullAttributeFilterAllowDeletes ?? false;
     }
 
     if (headers != null) {

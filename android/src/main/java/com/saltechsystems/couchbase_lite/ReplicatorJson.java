@@ -94,11 +94,11 @@ class ReplicatorJson {
         }
 
         if (replicatorMap.pushAttributeFilters != null) {
-            mReplicatorConfig.setPushFilter(inflateReplicationFilter(replicatorMap.pushAttributeFilters));
+            mReplicatorConfig.setPushFilter(inflateReplicationFilter(replicatorMap.pushAttributeFilters, replicatorMap.pushAttributeFilterAllowDeletes));
         }
 
         if (replicatorMap.pullAttributeFilters != null) {
-            mReplicatorConfig.setPullFilter(inflateReplicationFilter(replicatorMap.pullAttributeFilters));
+            mReplicatorConfig.setPullFilter(inflateReplicationFilter(replicatorMap.pullAttributeFilters, replicatorMap.pullAttributeFilterAllowDeletes));
         }
 
         if (replicatorMap.headers != null) {
@@ -137,11 +137,17 @@ class ReplicatorJson {
         }
     }
 
-    private static ReplicationFilter inflateReplicationFilter(final Map<String, List<Object>> filterMap) {
+    private static ReplicationFilter inflateReplicationFilter(final Map<String, List<Object>> filterMap, final boolean allowDeletes) {
         return new ReplicationFilter() {
             @Override
             public boolean filtered(@NonNull Document document,
                                     @NonNull EnumSet<DocumentFlag> flags) {
+                if (flags.contains(DocumentFlag.DocumentFlagsAccessRemoved)) {
+                    return true;
+                }
+                if (allowDeletes && flags.contains(DocumentFlag.DocumentFlagsDeleted)) {
+                    return true;
+                }
                 for (Map.Entry<String, List<Object>> entry : filterMap.entrySet()) {
                     if (!document.contains(entry.getKey())) {
                         return false;
@@ -176,7 +182,9 @@ class ReplicatorMap {
     Map<String, Object> authenticator;
     List<String> channels;
     Map<String, List<Object>> pushAttributeFilters;
+    boolean pushAttributeFilterAllowDeletes;
     Map<String, List<Object>> pullAttributeFilters;
+    boolean pullAttributeFilterAllowDeletes;
     Map<String, String> headers;
 
 
@@ -233,10 +241,24 @@ class ReplicatorMap {
                 }
             }
 
+            if (config.containsKey("pushAttributeFilterAllowDeletes")) {
+                Object pushAttributeFilterAllowDeletesObject = config.get("pushAttributeFilterAllowDeletes");
+                if (pushAttributeFilterAllowDeletesObject instanceof Boolean) {
+                    pushAttributeFilterAllowDeletes = (Boolean)pushAttributeFilterAllowDeletesObject;
+                }
+            }
+
             if (config.containsKey("pullAttributeFilters")) {
                 Object filterObject = config.get("pullAttributeFilters");
                 if (filterObject instanceof Map<?, ?>) {
                     pullAttributeFilters = getFilterMapFromGenericMap(filterObject);
+                }
+            }
+
+            if (config.containsKey("pullAttributeFilterAllowDeletes")) {
+                Object pullAttributeFilterAllowDeletesObject = config.get("pullAttributeFilterAllowDeletes");
+                if (pullAttributeFilterAllowDeletesObject instanceof Boolean) {
+                    pullAttributeFilterAllowDeletes = (Boolean)pullAttributeFilterAllowDeletesObject;
                 }
             }
 

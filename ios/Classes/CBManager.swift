@@ -299,11 +299,11 @@ class CBManager {
         }
 
         if let pushFilters = map["pushAttributeFilters"] as? [String:[Any?]] {
-            config.pushFilter = CBManager.inflateReplicationFilter(pushFilters)
+            config.pushFilter = CBManager.inflateReplicationFilter(pushFilters, map["pushAttributeFilterAllowDeletes"] as? Bool ?? false)
         }
 
         if let pullFilters = map["pullAttributeFilters"] as? [String:[Any?]] {
-            config.pullFilter = CBManager.inflateReplicationFilter(pullFilters)
+            config.pullFilter = CBManager.inflateReplicationFilter(pullFilters, map["pullAttributeFilterAllowDeletes"] as? Bool ?? false)
         }
 
         if let headers = map["headers"] as? Dictionary<String,Any> {
@@ -344,9 +344,15 @@ class CBManager {
         }
     }
 
-    static func inflateReplicationFilter(_ filterConfig: [String:[Any?]]) -> CouchbaseLiteSwift.ReplicationFilter {
+    static func inflateReplicationFilter(_ filterConfig: [String:[Any?]], _ allowDeletes: Bool) -> CouchbaseLiteSwift.ReplicationFilter {
         let filterValues: [String:[Any?]] = filterConfig.compactMapValues { $0.compactMap { CBManager.convertSETValue($0) } }
         return { (document, flags) in
+            if flags.contains(CouchbaseLiteSwift.DocumentFlags.accessRemoved) {
+                return true
+            }
+            if allowDeletes && flags.contains(CouchbaseLiteSwift.DocumentFlags.deleted) {
+                return true
+            }
             for (key, values) in filterValues {
                 guard document.contains(key: key) else {
                     return false
