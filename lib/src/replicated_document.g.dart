@@ -28,7 +28,7 @@ class _$ReplicatedDocumentSerializer
     if (object.error != null) {
       result
         ..add('error')
-        ..add(serializers.serialize(object.error,
+        ..add(serializers.serialize(object.error!,
             specifiedType: const FullType(String)));
     }
     return result;
@@ -69,15 +69,15 @@ class _$ReplicatedDocument extends ReplicatedDocument {
   @override
   final String id;
   @override
-  final String error;
+  final String? error;
   @override
   final int flags;
 
   factory _$ReplicatedDocument(
-          [void Function(ReplicatedDocumentBuilder) updates]) =>
+          [void Function(ReplicatedDocumentBuilder)? updates]) =>
       (new ReplicatedDocumentBuilder()..update(updates)).build();
 
-  _$ReplicatedDocument._({this.id, this.error, this.flags}) : super._() {
+  _$ReplicatedDocument._({required this.id, this.error, required this.flags}) : super._() {
     if (id == null) {
       throw new BuiltValueNullFieldError('ReplicatedDocument', 'id');
     }
@@ -121,27 +121,27 @@ class _$ReplicatedDocument extends ReplicatedDocument {
 
 class ReplicatedDocumentBuilder
     implements Builder<ReplicatedDocument, ReplicatedDocumentBuilder> {
-  _$ReplicatedDocument _$v;
+  _$ReplicatedDocument? _$v;
 
-  String _id;
-  String get id => _$this._id;
-  set id(String id) => _$this._id = id;
+  String? _id;
+  String? get id => _$this._id;
+  set id(String? id) => _$this._id = id;
 
-  String _error;
-  String get error => _$this._error;
-  set error(String error) => _$this._error = error;
+  String? _error;
+  String? get error => _$this._error;
+  set error(String? error) => _$this._error = error;
 
-  int _flags;
-  int get flags => _$this._flags;
-  set flags(int flags) => _$this._flags = flags;
+  int? _flags;
+  int? get flags => _$this._flags;
+  set flags(int? flags) => _$this._flags = flags;
 
   ReplicatedDocumentBuilder();
 
   ReplicatedDocumentBuilder get _$this {
     if (_$v != null) {
-      _id = _$v.id;
-      _error = _$v.error;
-      _flags = _$v.flags;
+      _id = _$v!.id;
+      _error = _$v!.error;
+      _flags = _$v!.flags;
       _$v = null;
     }
     return this;
@@ -156,14 +156,14 @@ class ReplicatedDocumentBuilder
   }
 
   @override
-  void update(void Function(ReplicatedDocumentBuilder) updates) {
+  void update(void Function(ReplicatedDocumentBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
   _$ReplicatedDocument build() {
     final _$result =
-        _$v ?? new _$ReplicatedDocument._(id: id, error: error, flags: flags);
+        _$v ?? new _$ReplicatedDocument._(id: id!, error: error, flags: flags!);
     replace(_$result);
     return _$result;
   }

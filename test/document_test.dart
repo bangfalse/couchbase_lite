@@ -4,9 +4,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:couchbase_lite/couchbase_lite.dart';
 
 void main() {
-  /*late*/Map initializer;
-  Document document;
-  MutableDocument mutableDocument;
+  late Map initializer;
+  late Document document;
+  late MutableDocument mutableDocument;
   setUp(() {
     initializer = Map();
     initializer['string'] = "string";
@@ -135,7 +135,7 @@ void main() {
   test("Blob", () async {
     Blob blob = Blob.data("application/octet-stream", Uint8List(0));
     mutableDocument.setBlob("blob", blob);
-    expect(await mutableDocument.getBlob("blob").content, await blob.content);
+    expect(await mutableDocument.getBlob("blob")!.content, await blob.content);
   });
   test("NullDocument", () {
     expect(MutableDocument(id: "test").toMap(), {});

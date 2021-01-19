@@ -196,7 +196,7 @@ void main() {
     expect(doc.id, "documentid");
     await database.saveDocument(doc);
     expect(doc.id, "documentid");
-    var testDoc = await database.document("myid");
+    var testDoc = await (database.document("myid") as FutureOr<Document>);
     expect(testDoc.id, "myid");
     expect(await database.deleteDocument("myid"), true);
     // Code Coverage for deprecate functions

@@ -16,16 +16,16 @@ abstract class DocumentReplication
   DocumentReplication._();
 
   factory DocumentReplication(
-      [Function(DocumentReplicationBuilder b) updates]) = _$DocumentReplication;
+      [Function(DocumentReplicationBuilder b)? updates]) = _$DocumentReplication;
 
   @nullable
   @BuiltValueField(serialize: false)
-  Replicator get replicator;
+  Replicator? get replicator;
   @nullable
   @BuiltValueField(wireName: 'isPush')
-  bool get isPush;
+  bool? get isPush;
   @BuiltValueField(wireName: 'documents')
-  BuiltList<ReplicatedDocument> get documents;
+  BuiltList<ReplicatedDocument>? get documents;
 
   String toJson() {
     return json.encode(toMap());
@@ -33,7 +33,7 @@ abstract class DocumentReplication
 
   Map toMap() {
     return standardSerializers.serializeWith(
-        DocumentReplication.serializer, this);
+        DocumentReplication.serializer, this) as Map<dynamic, dynamic>;
   }
 
   static DocumentReplication fromJson(String jsonString) {
