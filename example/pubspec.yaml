@@ -5,6 +5,14 @@ publish_to: 'none'
 environment:
   sdk: ">=2.6.0 <3.0.0"
 
+dependency_overrides:
+  crypto: ^3.0.0-nullsafety
+  built_value_generator:
+    git:
+      url: git://github.com/google/built_value.dart.git
+      path: built_value_generator
+      ref: be0feaf544ef576d459e1949bfd51dec1199bd7d
+
 dependencies:
   # rxdart is used for the database and observable response classes
   rxdart: ^0.23.1

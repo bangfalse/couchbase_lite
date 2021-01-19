@@ -2,7 +2,7 @@ part of couchbase_lite;
 
 class Query {
   final queryId = Uuid().v1();
-  bool _stored = false;
+  bool/*!*/ _stored = false;
   Map<String, dynamic> _options = {};
   Parameters get parameters => throw UnimplementedError();
   Map<ListenerToken, StreamSubscription> tokens = {};

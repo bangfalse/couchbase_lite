@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:couchbase_lite/couchbase_lite.dart';
 
 void main() {
-  Map initializer;
+  /*late*/Map initializer;
   Document document;
   MutableDocument mutableDocument;
   setUp(() {

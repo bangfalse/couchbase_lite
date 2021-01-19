@@ -17,12 +17,12 @@ abstract class ReplicatedDocument
       _$ReplicatedDocument;
 
   @BuiltValueField(wireName: 'document')
-  String get id;
+  String/*!*/ get id;
   @nullable
   @BuiltValueField(wireName: 'error')
   String get error;
   @BuiltValueField(wireName: 'flags')
-  int get flags;
+  int/*!*/ get flags;
 
   String toJson() {
     return json.encode(toMap());

@@ -7,7 +7,7 @@ class Document {
     _data = _stringMapFromDynamic(data ?? {});
   }
 
-  Map<dynamic, dynamic> _data;
+  /*late*/ Map<dynamic, dynamic>/*!*/ _data;
   // ignore: prefer_final_fields
   String _dbname;
   // ignore: prefer_final_fields

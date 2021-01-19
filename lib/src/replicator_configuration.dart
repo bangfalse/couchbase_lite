@@ -18,7 +18,7 @@ class ReplicatorConfiguration {
   /// Filters which documents should be replicated. Keys are attribute names,
   /// and values are a list of allowed values for that attribute. A document
   /// will only be pushed if it matches all of the filters in this map.
-  Map<String, List<dynamic>> pushAttributeFilters;
+  Map<String/*!*/, List<dynamic>/*!*/> pushAttributeFilters;
   @Deprecated('use pushAttributeFilters instead for multiple filter support')
   List<dynamic> pushAttributeValuesFilter;
   @Deprecated('use pushAttributeFilters instead for multiple filter support')
@@ -32,7 +32,7 @@ class ReplicatorConfiguration {
   /// Filters which documents should be replicated. Keys are attribute names,
   /// and values are a list of allowed values for that attribute. A document
   /// will only be pulled if it matches all of the filters in this map.
-  Map<String, List<dynamic>> pullAttributeFilters;
+  Map<String/*!*/, List<dynamic>/*!*/> pullAttributeFilters;
   @Deprecated('use pullAttributeFilters instead for multiple filter support')
   List<dynamic> pullAttributeValuesFilter;
   @Deprecated('use pullAttributeFilters instead for multiple filter support')
