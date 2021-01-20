@@ -136,7 +136,7 @@ class Database {
       return null;
     }
 
-    Future<Uint8List>? readContent() async {
+    Future<Uint8List?> readContent() async {
       var blobPath = path! +
           'Attachments/' +
           blob.digest!.replaceFirst('sha1-', '').replaceAll('/', '_') +

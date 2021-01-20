@@ -19,10 +19,10 @@ class _$BeerSerializer implements StructuredSerializer<Beer> {
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'beerID',
-      serializers.serialize(object.beerID,
+      serializers.serialize(object.beerID!,
           specifiedType: const FullType(String)),
       'name',
-      serializers.serialize(object.name, specifiedType: const FullType(String)),
+      serializers.serialize(object.name!, specifiedType: const FullType(String)),
     ];
 
     return result;
@@ -56,11 +56,11 @@ class _$BeerSerializer implements StructuredSerializer<Beer> {
 
 class _$Beer extends Beer {
   @override
-  final String beerID;
+  final String? beerID;
   @override
-  final String name;
+  final String? name;
 
-  factory _$Beer([void Function(BeerBuilder) updates]) =>
+  factory _$Beer([void Function(BeerBuilder)? updates]) =>
       (new BeerBuilder()..update(updates)).build();
 
   _$Beer._({this.beerID, this.name}) : super._() {
@@ -100,22 +100,22 @@ class _$Beer extends Beer {
 }
 
 class BeerBuilder implements Builder<Beer, BeerBuilder> {
-  _$Beer _$v;
+  _$Beer? _$v;
 
-  String _beerID;
-  String get beerID => _$this._beerID;
-  set beerID(String beerID) => _$this._beerID = beerID;
+  String? _beerID;
+  String? get beerID => _$this._beerID;
+  set beerID(String? beerID) => _$this._beerID = beerID;
 
-  String _name;
-  String get name => _$this._name;
-  set name(String name) => _$this._name = name;
+  String? _name;
+  String? get name => _$this._name;
+  set name(String? name) => _$this._name = name;
 
   BeerBuilder();
 
   BeerBuilder get _$this {
     if (_$v != null) {
-      _beerID = _$v.beerID;
-      _name = _$v.name;
+      _beerID = _$v!.beerID;
+      _name = _$v!.name;
       _$v = null;
     }
     return this;
@@ -130,7 +130,7 @@ class BeerBuilder implements Builder<Beer, BeerBuilder> {
   }
 
   @override
-  void update(void Function(BeerBuilder) updates) {
+  void update(void Function(BeerBuilder)? updates) {
     if (updates != null) updates(this);
   }
 

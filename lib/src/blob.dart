@@ -21,7 +21,7 @@ class Blob {
   Uint8List? blobData;
 
   Future<Uint8List?> contentFromDatabase(Database database) async {
-    Future<Uint8List>? readContent() async {
+    Future<Uint8List?> readContent() async {
       var blobPath = database.path! +
           'Attachments/' +
           _digest!.replaceFirst('sha1-', '').replaceAll('/', '_') +

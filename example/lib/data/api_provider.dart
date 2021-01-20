@@ -54,19 +54,19 @@ class ApiProvider {
   }
 
   // If refreshing the access token fails we will use this function to logout
-  LogoutCallback _onLogout;
+  LogoutCallback? _onLogout;
   @visibleForTesting
-  String refreshToken = "";
+  String? refreshToken = "";
   @visibleForTesting
-  String accessToken = "";
+  String? accessToken = "";
   @visibleForTesting
-  String tokenType = "";
+  String? tokenType = "";
   DateTime expiresAt = DateTime(0);
   @visibleForTesting
   Environment environment = Environment.production;
 
   Future<http.Response> login(String username, String password,
-      {LogoutCallback onLogout}) async {
+      {LogoutCallback? onLogout}) async {
     _onLogout = onLogout;
 
     /*final response = await client.post(authEndpoint, body: {
@@ -92,7 +92,7 @@ class ApiProvider {
       tokenType = tokenResponse.tokenType;
       refreshToken = tokenResponse.refreshToken;
       expiresAt =
-          DateTime.now().add(Duration(seconds: tokenResponse.expiresIn));
+          DateTime.now().add(Duration(seconds: tokenResponse.expiresIn!));
     }
 
     return response;
@@ -112,9 +112,9 @@ class ApiProvider {
         accessToken = tokenResponse.accessToken;
         tokenType = tokenResponse.tokenType;
         expiresAt =
-            DateTime.now().add(Duration(seconds: tokenResponse.expiresIn));
+            DateTime.now().add(Duration(seconds: tokenResponse.expiresIn!));
       } else if (response.statusCode == 401 && _onLogout != null) {
-        _onLogout(LogoutMethod.apiCredentialsError);
+        _onLogout!(LogoutMethod.apiCredentialsError);
       }
     }
   }

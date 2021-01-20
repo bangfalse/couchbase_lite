@@ -30,25 +30,25 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  String usernameErrorMessage;
-  String passwordErrorMessage;
+  String? usernameErrorMessage;
+  String? passwordErrorMessage;
   Environment databaseEnvironment = Environment.production;
   var environmentNames = {
     Environment.production: "Production",
     Environment.development: "Development"
   };
 
-  StreamSubscription<bool> _loggedInSubscription;
-  StreamSubscription<LogoutMethod> _logoutSubscription;
+  StreamSubscription<bool>? _loggedInSubscription;
+  StreamSubscription<LogoutMethod>? _logoutSubscription;
 
   String appName = "";
   String version = "";
 
   bool _isAuthenticating = false;
 
-  TextEditingController _usernameController;
-  TextEditingController _passwordController;
-  FocusNode _passwordFocus;
+  TextEditingController? _usernameController;
+  TextEditingController? _passwordController;
+  FocusNode? _passwordFocus;
 
   @override
   void initState() {
@@ -207,8 +207,8 @@ class _LoginPageState extends State<LoginPage> {
                             passwordErrorMessage = null;
                           });
 
-                          _usernameController.clear();
-                          _passwordController.clear();
+                          _usernameController!.clear();
+                          _passwordController!.clear();
                         },
                       ),
                     if (!_isAuthenticating)
@@ -246,8 +246,8 @@ class _LoginPageState extends State<LoginPage> {
 
   void _onSignin() {
     if (_validateUsername() && _validatePassword()) {
-      final username = _usernameController.text;
-      final password = _passwordController.text;
+      final username = _usernameController!.text;
+      final password = _passwordController!.text;
 
       Repository.instance.login(databaseEnvironment, username, password,
           (result) {
@@ -284,8 +284,8 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   bool _validateUsername() {
-    _usernameController.text = _usernameController.text.trim().toLowerCase();
-    if (_usernameController.text.isEmpty) {
+    _usernameController!.text = _usernameController!.text.trim().toLowerCase();
+    if (_usernameController!.text.isEmpty) {
       setState(() {
         usernameErrorMessage = "Username required";
       });
@@ -299,8 +299,8 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   bool _validatePassword() {
-    _passwordController.text = _passwordController.text.trim();
-    if (_passwordController.text.isEmpty) {
+    _passwordController!.text = _passwordController!.text.trim();
+    if (_passwordController!.text.isEmpty) {
       setState(() {
         passwordErrorMessage = "Password required";
       });

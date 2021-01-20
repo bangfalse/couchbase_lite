@@ -26,20 +26,20 @@ part 'brewery.g.dart';
 abstract class Brewery implements Built<Brewery, BreweryBuilder> {
   Brewery._();
 
-  factory Brewery([updates(BreweryBuilder b)]) = _$Brewery;
+  factory Brewery([updates(BreweryBuilder b)?]) = _$Brewery;
 
   @nullable
   @BuiltValueField(serialize: false)
-  String get id;
+  String? get id;
   @BuiltValueField(wireName: 'name')
-  String get name;
+  String? get name;
 
   String toJson() {
     return json.encode(toMap());
   }
 
   Map toMap() {
-    return standardSerializers.serializeWith(Brewery.serializer, this);
+    return standardSerializers.serializeWith(Brewery.serializer, this) as Map<dynamic, dynamic>;
   }
 
   static Brewery fromJson(String jsonString) {

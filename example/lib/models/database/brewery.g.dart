@@ -19,7 +19,7 @@ class _$BrewerySerializer implements StructuredSerializer<Brewery> {
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'name',
-      serializers.serialize(object.name, specifiedType: const FullType(String)),
+      serializers.serialize(object.name!, specifiedType: const FullType(String)),
     ];
 
     return result;
@@ -49,11 +49,11 @@ class _$BrewerySerializer implements StructuredSerializer<Brewery> {
 
 class _$Brewery extends Brewery {
   @override
-  final String id;
+  final String? id;
   @override
-  final String name;
+  final String? name;
 
-  factory _$Brewery([void Function(BreweryBuilder) updates]) =>
+  factory _$Brewery([void Function(BreweryBuilder)? updates]) =>
       (new BreweryBuilder()..update(updates)).build();
 
   _$Brewery._({this.id, this.name}) : super._() {
@@ -90,22 +90,22 @@ class _$Brewery extends Brewery {
 }
 
 class BreweryBuilder implements Builder<Brewery, BreweryBuilder> {
-  _$Brewery _$v;
+  _$Brewery? _$v;
 
-  String _id;
-  String get id => _$this._id;
-  set id(String id) => _$this._id = id;
+  String? _id;
+  String? get id => _$this._id;
+  set id(String? id) => _$this._id = id;
 
-  String _name;
-  String get name => _$this._name;
-  set name(String name) => _$this._name = name;
+  String? _name;
+  String? get name => _$this._name;
+  set name(String? name) => _$this._name = name;
 
   BreweryBuilder();
 
   BreweryBuilder get _$this {
     if (_$v != null) {
-      _id = _$v.id;
-      _name = _$v.name;
+      _id = _$v!.id;
+      _name = _$v!.name;
       _$v = null;
     }
     return this;
@@ -120,7 +120,7 @@ class BreweryBuilder implements Builder<Brewery, BreweryBuilder> {
   }
 
   @override
-  void update(void Function(BreweryBuilder) updates) {
+  void update(void Function(BreweryBuilder)? updates) {
     if (updates != null) updates(this);
   }
 

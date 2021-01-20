@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:couchbase_lite/couchbase_lite.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';

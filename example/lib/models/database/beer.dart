@@ -26,19 +26,19 @@ part 'beer.g.dart';
 abstract class Beer implements Built<Beer, BeerBuilder> {
   Beer._();
 
-  factory Beer([updates(BeerBuilder b)]) = _$Beer;
+  factory Beer([updates(BeerBuilder b)?]) = _$Beer;
 
   @BuiltValueField(wireName: 'beerID')
-  String get beerID;
+  String? get beerID;
   @BuiltValueField(wireName: 'name')
-  String get name;
+  String? get name;
 
   String toJson() {
     return json.encode(toMap());
   }
 
   Map toMap() {
-    return standardSerializers.serializeWith(Beer.serializer, this);
+    return standardSerializers.serializeWith(Beer.serializer, this) as Map<dynamic, dynamic>;
   }
 
   static Beer fromJson(String jsonString) {

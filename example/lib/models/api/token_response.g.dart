@@ -20,22 +20,22 @@ class _$TokenResponseSerializer implements StructuredSerializer<TokenResponse> {
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'access_token',
-      serializers.serialize(object.accessToken,
+      serializers.serialize(object.accessToken!,
           specifiedType: const FullType(String)),
       'token_type',
-      serializers.serialize(object.tokenType,
+      serializers.serialize(object.tokenType!,
           specifiedType: const FullType(String)),
       'expires_in',
-      serializers.serialize(object.expiresIn,
+      serializers.serialize(object.expiresIn!,
           specifiedType: const FullType(int)),
       'scope',
-      serializers.serialize(object.scope,
+      serializers.serialize(object.scope!,
           specifiedType: const FullType(String)),
     ];
     if (object.refreshToken != null) {
       result
         ..add('refresh_token')
-        ..add(serializers.serialize(object.refreshToken,
+        ..add(serializers.serialize(object.refreshToken!,
             specifiedType: const FullType(String)));
     }
     return result;
@@ -82,17 +82,17 @@ class _$TokenResponseSerializer implements StructuredSerializer<TokenResponse> {
 
 class _$TokenResponse extends TokenResponse {
   @override
-  final String accessToken;
+  final String? accessToken;
   @override
-  final String refreshToken;
+  final String? refreshToken;
   @override
-  final String tokenType;
+  final String? tokenType;
   @override
-  final int expiresIn;
+  final int? expiresIn;
   @override
-  final String scope;
+  final String? scope;
 
-  factory _$TokenResponse([void Function(TokenResponseBuilder) updates]) =>
+  factory _$TokenResponse([void Function(TokenResponseBuilder)? updates]) =>
       (new TokenResponseBuilder()..update(updates)).build();
 
   _$TokenResponse._(
@@ -158,37 +158,37 @@ class _$TokenResponse extends TokenResponse {
 
 class TokenResponseBuilder
     implements Builder<TokenResponse, TokenResponseBuilder> {
-  _$TokenResponse _$v;
+  _$TokenResponse? _$v;
 
-  String _accessToken;
-  String get accessToken => _$this._accessToken;
-  set accessToken(String accessToken) => _$this._accessToken = accessToken;
+  String? _accessToken;
+  String? get accessToken => _$this._accessToken;
+  set accessToken(String? accessToken) => _$this._accessToken = accessToken;
 
-  String _refreshToken;
-  String get refreshToken => _$this._refreshToken;
-  set refreshToken(String refreshToken) => _$this._refreshToken = refreshToken;
+  String? _refreshToken;
+  String? get refreshToken => _$this._refreshToken;
+  set refreshToken(String? refreshToken) => _$this._refreshToken = refreshToken;
 
-  String _tokenType;
-  String get tokenType => _$this._tokenType;
-  set tokenType(String tokenType) => _$this._tokenType = tokenType;
+  String? _tokenType;
+  String? get tokenType => _$this._tokenType;
+  set tokenType(String? tokenType) => _$this._tokenType = tokenType;
 
-  int _expiresIn;
-  int get expiresIn => _$this._expiresIn;
-  set expiresIn(int expiresIn) => _$this._expiresIn = expiresIn;
+  int? _expiresIn;
+  int? get expiresIn => _$this._expiresIn;
+  set expiresIn(int? expiresIn) => _$this._expiresIn = expiresIn;
 
-  String _scope;
-  String get scope => _$this._scope;
-  set scope(String scope) => _$this._scope = scope;
+  String? _scope;
+  String? get scope => _$this._scope;
+  set scope(String? scope) => _$this._scope = scope;
 
   TokenResponseBuilder();
 
   TokenResponseBuilder get _$this {
     if (_$v != null) {
-      _accessToken = _$v.accessToken;
-      _refreshToken = _$v.refreshToken;
-      _tokenType = _$v.tokenType;
-      _expiresIn = _$v.expiresIn;
-      _scope = _$v.scope;
+      _accessToken = _$v!.accessToken;
+      _refreshToken = _$v!.refreshToken;
+      _tokenType = _$v!.tokenType;
+      _expiresIn = _$v!.expiresIn;
+      _scope = _$v!.scope;
       _$v = null;
     }
     return this;
@@ -203,7 +203,7 @@ class TokenResponseBuilder
   }
 
   @override
-  void update(void Function(TokenResponseBuilder) updates) {
+  void update(void Function(TokenResponseBuilder)? updates) {
     if (updates != null) updates(this);
   }
 

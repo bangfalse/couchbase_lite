@@ -93,10 +93,10 @@ void main() {
   });
   test("mutableDocument: setting list", () {
     // ignore: deprecated_member_use_from_same_package
-    mutableDocument.setArray('list', List<int>());
+    mutableDocument.setArray('list', <int>[]);
     // ignore: deprecated_member_use_from_same_package
     expect(mutableDocument.getArray('list'), []);
-    mutableDocument.setList('list', List<int>());
+    mutableDocument.setList('list', <int>[]);
     expect(mutableDocument.getList('list'), []);
   });
   test("mutableDocument: null map", () {
@@ -125,7 +125,7 @@ void main() {
   });
   test("mutableDocument: setting data / toMutable", () {
     var map = mutableDocument.toMap();
-    mutableDocument.setData(null);
+    mutableDocument.setData({});
     expect(mutableDocument.toMap(), {});
     expect(mutableDocument.getKeys(), []);
     mutableDocument.setData(map);
