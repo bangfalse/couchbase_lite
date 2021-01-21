@@ -25,8 +25,8 @@ class Database {
   Map<ListenerToken, StreamSubscription> tokens = {};
 
   /// The number of documents in the database
-  Future<int> get count => _methodChannel
-      .invokeMethod('getDocumentCount', <String, dynamic>{'database': name}) as Future<int>;
+  Future<int> get count async => (await _methodChannel.invokeMethod(
+      'getDocumentCount', <String, dynamic>{'database': name})) as int;
 
   /// Deletes a database of the given [dbName].
   static Future<void> deleteWithName(String dbName) =>
@@ -72,16 +72,16 @@ class Database {
     Map<dynamic, dynamic> result;
     if (doc.id == null) {
       result =
-          await (_methodChannel.invokeMethod('saveDocument', <String, dynamic>{
+          (await _methodChannel.invokeMethod('saveDocument', <String, dynamic>{
         'database': name,
         'map': doc.toMap(),
         'concurrencyControl':
             concurrencyControl == ConcurrencyControl.failOnConflict
                 ? 'failOnConflict'
                 : 'lastWriteWins'
-      }) as FutureOr<Map<dynamic, dynamic>>);
+      })) as Map<dynamic, dynamic>;
     } else if (doc.sequence != null) {
-      result = await (_methodChannel
+      result = (await _methodChannel
           .invokeMethod('saveDocumentWithId', <String, dynamic>{
         'database': name,
         'id': doc.id,
@@ -91,9 +91,9 @@ class Database {
             concurrencyControl == ConcurrencyControl.failOnConflict
                 ? 'failOnConflict'
                 : 'lastWriteWins'
-      }) as FutureOr<Map<dynamic, dynamic>>);
+      })) as Map<dynamic, dynamic>;
     } else {
-      result = await (_methodChannel
+      result = (await _methodChannel
           .invokeMethod('saveDocumentWithId', <String, dynamic>{
         'database': name,
         'id': doc.id,
@@ -102,7 +102,7 @@ class Database {
             concurrencyControl == ConcurrencyControl.failOnConflict
                 ? 'failOnConflict'
                 : 'lastWriteWins'
-      }) as FutureOr<Map<dynamic, dynamic>>);
+      })) as Map<dynamic, dynamic>;
     }
 
     if (result['success'] == true) {
@@ -153,7 +153,7 @@ class Database {
   /// Creates an index [withName] which could be a value index or a full-text search index.
   /// The name can be used for deleting the index. Creating a new different index with an existing index
   /// name will replace the old index; creating the same index with the same name will be no-ops.
-  Future<bool> createIndex(Index index, {required String withName}) {
+  Future<bool> createIndex(Index index, {required String withName}) async {
     var methodName;
     if (index is ValueIndex) {
       methodName = 'createIndex';
@@ -166,11 +166,11 @@ class Database {
         'unknown index type',
       );
     }
-    return _methodChannel.invokeMethod(methodName, <String, dynamic>{
+    return (await _methodChannel.invokeMethod(methodName, <String, dynamic>{
       'database': name,
       'index': index.toJson(),
       'withName': withName
-    }) as Future<bool>;
+    })) as bool;
   }
 
   /// Deletes index [forName] from the database.
