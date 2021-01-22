@@ -7,11 +7,6 @@ environment:
 
 dependency_overrides:
   crypto: ^3.0.0-nullsafety
-  built_value_generator:
-    git:
-      url: git://github.com/google/built_value.dart.git
-      path: built_value_generator
-      ref: be0feaf544ef576d459e1949bfd51dec1199bd7d
 
 dependencies:
   # rxdart is used for the database and observable response classes
@@ -29,7 +24,7 @@ dependencies:
 
 dev_dependencies:
   build_runner: ^1.0.0
-  built_value_generator: ^7.0.9
+  built_value_generator: ^8.0.0-nullsafety
 
   flutter_test:
     sdk: flutter
