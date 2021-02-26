@@ -10,7 +10,8 @@ environment:
   flutter: ">=1.12.0 <2.0.0"
 
 dependency_overrides:
-  crypto: ^3.0.0-nullsafety
+  crypto: ^3.0.0
+  args: ^1.6.0
 
 dependencies:
   built_collection: ^5.0.0-nullsafety
@@ -21,8 +22,8 @@ dependencies:
   flutter:
     sdk: flutter
 
-  encrypt: ^4.1.0
-  crypto: ^3.0.0-nullsafety #Encryption
+  encrypt: ^5.0.0-beta
+  crypto: ^3.0.0 #Encryption
   hex: ^0.1.2   #convert to hex
 
 dev_dependencies:

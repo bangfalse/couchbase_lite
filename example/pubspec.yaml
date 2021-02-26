@@ -6,7 +6,8 @@ environment:
   sdk: '>=2.12.0-133.7.beta <3.0.0'
 
 dependency_overrides:
-  crypto: ^3.0.0-nullsafety
+  crypto: ^3.0.0
+  args: ^1.6.0
 
 dependencies:
   # rxdart is used for the database and observable response classes
