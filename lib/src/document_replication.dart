@@ -34,11 +34,11 @@ abstract class DocumentReplication
         DocumentReplication.serializer, this) as Map<dynamic, dynamic>;
   }
 
-  static DocumentReplication fromJson(String jsonString) {
+  static DocumentReplication? fromJson(String jsonString) {
     return fromMap(json.decode(jsonString));
   }
 
-  static DocumentReplication fromMap(Map jsonMap) {
+  static DocumentReplication? fromMap(Map jsonMap) {
     return standardSerializers.deserializeWith(
         DocumentReplication.serializer, jsonMap);
   }

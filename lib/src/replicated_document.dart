@@ -32,11 +32,11 @@ abstract class ReplicatedDocument
         ReplicatedDocument.serializer, this) as Map<dynamic, dynamic>;
   }
 
-  static ReplicatedDocument fromJson(String jsonString) {
+  static ReplicatedDocument? fromJson(String jsonString) {
     return fromMap(json.decode(jsonString));
   }
 
-  static ReplicatedDocument fromMap(Map jsonMap) {
+  static ReplicatedDocument? fromMap(Map jsonMap) {
     return standardSerializers.deserializeWith(
         ReplicatedDocument.serializer, jsonMap);
   }

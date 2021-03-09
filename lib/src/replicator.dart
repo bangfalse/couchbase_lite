@@ -85,7 +85,7 @@ class Replicator {
         .where((data) => ((data['replicator'] == replicatorId &&
             data['type'] == 'DocumentReplication')))
         .listen((data) {
-      callback(DocumentReplication.fromMap(data)
+      callback(DocumentReplication.fromMap(data)!
           .rebuild((b) => b..replicator = this));
     });
     return token;
