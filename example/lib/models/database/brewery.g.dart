@@ -15,18 +15,22 @@ class _$BrewerySerializer implements StructuredSerializer<Brewery> {
   final String wireName = 'Brewery';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, Brewery object,
+  Iterable<Object?> serialize(Serializers serializers, Brewery object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
-      'name',
-      serializers.serialize(object.name!, specifiedType: const FullType(String)),
-    ];
-
+    final result = <Object?>[];
+    Object? value;
+    value = object.name;
+    if (value != null) {
+      result
+        ..add('name')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     return result;
   }
 
   @override
-  Brewery deserialize(Serializers serializers, Iterable<Object> serialized,
+  Brewery deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new BreweryBuilder();
 
@@ -34,7 +38,7 @@ class _$BrewerySerializer implements StructuredSerializer<Brewery> {
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final dynamic value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'name':
           result.name = serializers.deserialize(value,
@@ -56,11 +60,7 @@ class _$Brewery extends Brewery {
   factory _$Brewery([void Function(BreweryBuilder)? updates]) =>
       (new BreweryBuilder()..update(updates)).build();
 
-  _$Brewery._({this.id, this.name}) : super._() {
-    if (name == null) {
-      throw new BuiltValueNullFieldError('Brewery', 'name');
-    }
-  }
+  _$Brewery._({this.id, this.name}) : super._();
 
   @override
   Brewery rebuild(void Function(BreweryBuilder) updates) =>
@@ -103,9 +103,10 @@ class BreweryBuilder implements Builder<Brewery, BreweryBuilder> {
   BreweryBuilder();
 
   BreweryBuilder get _$this {
-    if (_$v != null) {
-      _id = _$v!.id;
-      _name = _$v!.name;
+    final $v = _$v;
+    if ($v != null) {
+      _id = $v.id;
+      _name = $v.name;
       _$v = null;
     }
     return this;
@@ -113,9 +114,7 @@ class BreweryBuilder implements Builder<Brewery, BreweryBuilder> {
 
   @override
   void replace(Brewery other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$Brewery;
   }
 

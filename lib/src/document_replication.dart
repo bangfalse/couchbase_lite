@@ -18,10 +18,8 @@ abstract class DocumentReplication
   factory DocumentReplication(
       [Function(DocumentReplicationBuilder b)? updates]) = _$DocumentReplication;
 
-  @nullable
   @BuiltValueField(serialize: false)
   Replicator? get replicator;
-  @nullable
   @BuiltValueField(wireName: 'isPush')
   bool? get isPush;
   @BuiltValueField(wireName: 'documents')

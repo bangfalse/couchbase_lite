@@ -16,26 +16,42 @@ class _$TokenResponseSerializer implements StructuredSerializer<TokenResponse> {
   final String wireName = 'TokenResponse';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, TokenResponse object,
+  Iterable<Object?> serialize(Serializers serializers, TokenResponse object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
-      'access_token',
-      serializers.serialize(object.accessToken!,
-          specifiedType: const FullType(String)),
-      'token_type',
-      serializers.serialize(object.tokenType!,
-          specifiedType: const FullType(String)),
-      'expires_in',
-      serializers.serialize(object.expiresIn!,
-          specifiedType: const FullType(int)),
-      'scope',
-      serializers.serialize(object.scope!,
-          specifiedType: const FullType(String)),
-    ];
-    if (object.refreshToken != null) {
+    final result = <Object?>[];
+    Object? value;
+    value = object.accessToken;
+    if (value != null) {
+      result
+        ..add('access_token')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.refreshToken;
+    if (value != null) {
       result
         ..add('refresh_token')
-        ..add(serializers.serialize(object.refreshToken!,
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.tokenType;
+    if (value != null) {
+      result
+        ..add('token_type')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.expiresIn;
+    if (value != null) {
+      result
+        ..add('expires_in')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
+    value = object.scope;
+    if (value != null) {
+      result
+        ..add('scope')
+        ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
     return result;
@@ -43,7 +59,7 @@ class _$TokenResponseSerializer implements StructuredSerializer<TokenResponse> {
 
   @override
   TokenResponse deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new TokenResponseBuilder();
 
@@ -51,7 +67,7 @@ class _$TokenResponseSerializer implements StructuredSerializer<TokenResponse> {
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final dynamic value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'access_token':
           result.accessToken = serializers.deserialize(value,
@@ -101,20 +117,7 @@ class _$TokenResponse extends TokenResponse {
       this.tokenType,
       this.expiresIn,
       this.scope})
-      : super._() {
-    if (accessToken == null) {
-      throw new BuiltValueNullFieldError('TokenResponse', 'accessToken');
-    }
-    if (tokenType == null) {
-      throw new BuiltValueNullFieldError('TokenResponse', 'tokenType');
-    }
-    if (expiresIn == null) {
-      throw new BuiltValueNullFieldError('TokenResponse', 'expiresIn');
-    }
-    if (scope == null) {
-      throw new BuiltValueNullFieldError('TokenResponse', 'scope');
-    }
-  }
+      : super._();
 
   @override
   TokenResponse rebuild(void Function(TokenResponseBuilder) updates) =>
@@ -183,12 +186,13 @@ class TokenResponseBuilder
   TokenResponseBuilder();
 
   TokenResponseBuilder get _$this {
-    if (_$v != null) {
-      _accessToken = _$v!.accessToken;
-      _refreshToken = _$v!.refreshToken;
-      _tokenType = _$v!.tokenType;
-      _expiresIn = _$v!.expiresIn;
-      _scope = _$v!.scope;
+    final $v = _$v;
+    if ($v != null) {
+      _accessToken = $v.accessToken;
+      _refreshToken = $v.refreshToken;
+      _tokenType = $v.tokenType;
+      _expiresIn = $v.expiresIn;
+      _scope = $v.scope;
       _$v = null;
     }
     return this;
@@ -196,9 +200,7 @@ class TokenResponseBuilder
 
   @override
   void replace(TokenResponse other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$TokenResponse;
   }
 

@@ -28,7 +28,6 @@ abstract class Brewery implements Built<Brewery, BreweryBuilder> {
 
   factory Brewery([updates(BreweryBuilder b)?]) = _$Brewery;
 
-  @nullable
   @BuiltValueField(serialize: false)
   String? get id;
   @BuiltValueField(wireName: 'name')
@@ -42,11 +41,11 @@ abstract class Brewery implements Built<Brewery, BreweryBuilder> {
     return standardSerializers.serializeWith(Brewery.serializer, this) as Map<dynamic, dynamic>;
   }
 
-  static Brewery fromJson(String jsonString) {
+  static Brewery? fromJson(String jsonString) {
     return fromMap(json.decode(jsonString));
   }
 
-  static Brewery fromMap(Map jsonMap) {
+  static Brewery? fromMap(Map jsonMap) {
     return standardSerializers.deserializeWith(Brewery.serializer, jsonMap);
   }
 

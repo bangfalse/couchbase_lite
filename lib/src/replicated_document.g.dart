@@ -17,18 +17,21 @@ class _$ReplicatedDocumentSerializer
   final String wireName = 'ReplicatedDocument';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, ReplicatedDocument object,
+  Iterable<Object?> serialize(
+      Serializers serializers, ReplicatedDocument object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'document',
       serializers.serialize(object.id, specifiedType: const FullType(String)),
       'flags',
       serializers.serialize(object.flags, specifiedType: const FullType(int)),
     ];
-    if (object.error != null) {
+    Object? value;
+    value = object.error;
+    if (value != null) {
       result
         ..add('error')
-        ..add(serializers.serialize(object.error!,
+        ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
     return result;
@@ -36,7 +39,7 @@ class _$ReplicatedDocumentSerializer
 
   @override
   ReplicatedDocument deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new ReplicatedDocumentBuilder();
 
@@ -44,7 +47,7 @@ class _$ReplicatedDocumentSerializer
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final dynamic value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'document':
           result.id = serializers.deserialize(value,
@@ -77,13 +80,10 @@ class _$ReplicatedDocument extends ReplicatedDocument {
           [void Function(ReplicatedDocumentBuilder)? updates]) =>
       (new ReplicatedDocumentBuilder()..update(updates)).build();
 
-  _$ReplicatedDocument._({required this.id, this.error, required this.flags}) : super._() {
-    if (id == null) {
-      throw new BuiltValueNullFieldError('ReplicatedDocument', 'id');
-    }
-    if (flags == null) {
-      throw new BuiltValueNullFieldError('ReplicatedDocument', 'flags');
-    }
+  _$ReplicatedDocument._({required this.id, this.error, required this.flags})
+      : super._() {
+    BuiltValueNullFieldError.checkNotNull(id, 'ReplicatedDocument', 'id');
+    BuiltValueNullFieldError.checkNotNull(flags, 'ReplicatedDocument', 'flags');
   }
 
   @override
@@ -138,10 +138,11 @@ class ReplicatedDocumentBuilder
   ReplicatedDocumentBuilder();
 
   ReplicatedDocumentBuilder get _$this {
-    if (_$v != null) {
-      _id = _$v!.id;
-      _error = _$v!.error;
-      _flags = _$v!.flags;
+    final $v = _$v;
+    if ($v != null) {
+      _id = $v.id;
+      _error = $v.error;
+      _flags = $v.flags;
       _$v = null;
     }
     return this;
@@ -149,9 +150,7 @@ class ReplicatedDocumentBuilder
 
   @override
   void replace(ReplicatedDocument other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$ReplicatedDocument;
   }
 
@@ -162,8 +161,13 @@ class ReplicatedDocumentBuilder
 
   @override
   _$ReplicatedDocument build() {
-    final _$result =
-        _$v ?? new _$ReplicatedDocument._(id: id!, error: error, flags: flags!);
+    final _$result = _$v ??
+        new _$ReplicatedDocument._(
+            id: BuiltValueNullFieldError.checkNotNull(
+                id, 'ReplicatedDocument', 'id'),
+            error: error,
+            flags: BuiltValueNullFieldError.checkNotNull(
+                flags, 'ReplicatedDocument', 'flags'));
     replace(_$result);
     return _$result;
   }

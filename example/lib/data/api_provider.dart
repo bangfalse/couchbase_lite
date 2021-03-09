@@ -26,10 +26,10 @@ class ApiProvider {
   final String devUrl = "https://dev.example.com";
   final prodUrl = "https://www.example.com";
 
-  String get authEndpoint {
-    return environment == Environment.development
+  Uri get authEndpoint {
+    return Uri.parse(environment == Environment.development
         ? '$devUrl/oauth/v2/token'
-        : '$prodUrl/oauth/v2/token';
+        : '$prodUrl/oauth/v2/token');
   }
 
   @visibleForTesting
@@ -87,7 +87,7 @@ class ApiProvider {
     final response = http.Response(tokenPreResponse.toJson(), 200);
 
     if (response.statusCode == 200) {
-      var tokenResponse = TokenResponse.fromJson(response.body);
+      var tokenResponse = TokenResponse.fromJson(response.body)!;
       accessToken = tokenResponse.accessToken;
       tokenType = tokenResponse.tokenType;
       refreshToken = tokenResponse.refreshToken;
@@ -108,7 +108,7 @@ class ApiProvider {
       });
 
       if (response.statusCode == 200) {
-        var tokenResponse = TokenResponse.fromJson(response.body);
+        var tokenResponse = TokenResponse.fromJson(response.body)!;
         accessToken = tokenResponse.accessToken;
         tokenType = tokenResponse.tokenType;
         expiresAt =

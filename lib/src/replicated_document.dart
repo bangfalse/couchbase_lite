@@ -18,7 +18,6 @@ abstract class ReplicatedDocument
 
   @BuiltValueField(wireName: 'document')
   String get id;
-  @nullable
   @BuiltValueField(wireName: 'error')
   String? get error;
   @BuiltValueField(wireName: 'flags')
