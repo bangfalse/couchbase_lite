@@ -95,12 +95,30 @@ public class CouchbaseLitePlugin implements FlutterPlugin, CBManagerDelegate {
 
   @Override
   public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {
-    databaseChannel.setMethodCallHandler(null);
-    replicatorChannel.setMethodCallHandler(null);
-    jsonChannel.setMethodCallHandler(null);
-    replicationEventChannel.setStreamHandler(null);
-    queryEventChannel.setStreamHandler(null);
-    databaseEventChannel.setStreamHandler(null);
+    if (databaseChannel != null) {
+      databaseChannel.setMethodCallHandler(null);
+      databaseChannel = null;
+    }
+    if (replicatorChannel != null) {
+      replicatorChannel.setMethodCallHandler(null);
+      replicatorChannel = null;
+    }
+    if (jsonChannel != null) {
+      jsonChannel.setMethodCallHandler(null);
+      jsonChannel = null;
+    }
+    if (replicationEventChannel != null) {
+      replicationEventChannel.setStreamHandler(null);
+      replicationEventChannel = null;
+    }
+    if (queryEventChannel != null) {
+      queryEventChannel.setStreamHandler(null);
+      queryEventChannel = null;
+    }
+    if (databaseEventChannel != null) {
+      databaseEventChannel.setStreamHandler(null);
+      databaseEventChannel = null;
+    }
   }
 
   private void register(BinaryMessenger messenger) {
