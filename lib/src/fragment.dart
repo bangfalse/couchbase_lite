@@ -16,7 +16,10 @@ class Fragment {
   /// Returns true if the value exists, and is either `true` or a nonzero number.
   ///
   /// - Returns: The Bool value.
-  bool getBoolean() {
+  bool? getBoolean() {
+    if (_value == null) {
+      return null;
+    }
     if (_value is num) {
       return _value != 0;
     }
@@ -29,7 +32,10 @@ class Fragment {
   /// Returns 0.0 if the property doesn't exist or does not have a numeric value.
   ///
   /// - Returns: The Double value.
-  double getDouble() {
+  double? getDouble() {
+    if (_value == null) {
+      return null;
+    }
     if (_value is double) {
       return _value;
     } else if (_value is int) {
@@ -44,7 +50,10 @@ class Fragment {
   /// Returns 0 if the property doesn't exist or does not have a numeric value.
   ///
   /// - Returns: The Int value.
-  int getInt() {
+  int? getInt() {
+    if (_value == null) {
+      return null;
+    }
     if (_value is double) {
       return _value.toInt();
     } else if (_value is int) {

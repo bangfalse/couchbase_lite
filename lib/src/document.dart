@@ -42,7 +42,7 @@ class Document {
   ///
   /// - Parameter key: The key.
   /// - Returns: The Bool value.
-  bool getBoolean(String key) => this[key].getBoolean();
+  bool? getBoolean(String key) => this[key].getBoolean();
 
   /// Gets a property's value as a double value.
   /// Integers will be converted to double. The value `true` is returned as 1.0, `false` as 0.0.
@@ -50,7 +50,7 @@ class Document {
   ///
   /// - Parameter key: The key.
   /// - Returns: The Double value.
-  double getDouble(String key) => this[key].getDouble();
+  double? getDouble(String key) => this[key].getDouble();
 
   /// Gets a property's value as an int value.
   /// Floating point values will be rounded. The value `true` is returned as 1, `false` as 0.
@@ -58,7 +58,7 @@ class Document {
   ///
   /// - Parameter key: The key.
   /// - Returns: The Int value.
-  int getInt(String key) => this[key].getInt();
+  int? getInt(String key) => this[key].getInt();
 
   ///  Get a property’s value as a Blob object without the data.
   ///  Returns nil if the property doesn’t exist, or its value is not a blob.
