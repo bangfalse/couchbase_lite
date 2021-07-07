@@ -55,7 +55,7 @@ class _$ReplicatedDocumentSerializer
           break;
         case 'error':
           result.error = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'flags':
           result.flags = serializers.deserialize(value,

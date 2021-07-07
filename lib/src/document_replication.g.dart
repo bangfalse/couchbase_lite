@@ -57,13 +57,13 @@ class _$DocumentReplicationSerializer
       switch (key) {
         case 'isPush':
           result.isPush = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool;
+              specifiedType: const FullType(bool)) as bool?;
           break;
         case 'documents':
           result.documents.replace(serializers.deserialize(value,
                   specifiedType: const FullType(
                       BuiltList, const [const FullType(ReplicatedDocument)]))!
-              as BuiltList<Object>);
+              as BuiltList<Object?>);
           break;
       }
     }
